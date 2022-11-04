@@ -1,27 +1,75 @@
 import './App.css';
+import React, { useState } from 'react';
 import TextArea from './components/TextArea';
-import React, {useState} from 'react';
+import Alert from './components/Alert';
+import About from './components/About';
+import Navbar from './components/Navbar';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+} from "react-router-dom";
 
-function App() {
+
+function App(props) {
   const [mode, setMode] = useState('light');
   const [btnColor, setbtnColor] = useState('primary');
+  const [alert, setAlert] = useState(null);
 
-  function darkMode(){
-    if(mode === "light" && btnColor === "primary"){
+  const showAlert = (message, text) => {
+    setAlert({
+      msg: message,
+      type: text
+    });
+    setTimeout(() => {
+      setAlert();
+    }, 1000);
+  };
+
+  function darkMode() {
+    if (mode === "light" || document.body.style.backgroundColor === 'white') {
       setMode("dark");
       setbtnColor("dark");
       document.body.style.backgroundColor = '#1f476b';
+      showAlert("Success", "Dark mode enabled!");
+      document.title = "Text Editor-Dark-Mode";
     }
-    if(mode === "dark" && btnColor === "dark"){
+    else {
       setMode("light");
-      setbtnColor("primary");
+      setbtnColor("secondary");
       document.body.style.backgroundColor = 'white';
+      showAlert("Success", "Light mode enabled!");
+      document.title = "Text Editor-Light-Mode";
     }
   }
   return (
+    
     <div className="App">
-      <TextArea heading="Write something" mode={mode} darkMode={darkMode}/>
+      <Navbar title='Text-Editor' secondMenu={"About"}></Navbar>
+      <Alert alert={alert} />
+
+      {/* <Router>
+        <Routes>
+          <Route exact path="/" element=<TextArea title="Text-Editor" mode={mode} darkMode={darkMode} btnColor={btnColor} /> />
+          <Route exact path="/about" element=<About /> />
+        </Routes>
+      </Router> */}
+
+      {/* <BrowserRouter>
+      <Routes>
+
+        <Route path='/' element={<TextArea title="Text-Editor" mode={mode} darkMode={darkMode} btnColor={btnColor} />}></Route>
+        <Route path='/about' element=<About />></Route>
+
+      </Routes>
+      </BrowserRouter> */}
+      
+      <TextArea title="Text-Editor" mode={mode} darkMode={darkMode} btnColor={btnColor}/>
+      <About/>
     </div>
+  
   );
 }
 
