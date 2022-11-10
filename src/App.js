@@ -2,15 +2,15 @@ import './App.css';
 import React, { useState } from 'react';
 import TextArea from './components/TextArea';
 import Alert from './components/Alert';
-import About from './components/About';
+// import About from './components/About';
 import Navbar from './components/Navbar';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  Outlet,
-} from "react-router-dom";
+// import {
+//   BrowserRouter,
+//   Routes,
+//   Route,
+//   Link,
+//   Outlet,
+// } from "react-router-dom";
 
 
 function App(props) {
@@ -47,7 +47,7 @@ function App(props) {
   return (
     
     <div className="App">
-      <Navbar title='Text-Editor' secondMenu={"About"}></Navbar>
+      <Navbar title='Text-Editor' secondMenu={"About"}/>
       <Alert alert={alert} />
 
       {/* <Router>
@@ -66,8 +66,7 @@ function App(props) {
       </Routes>
       </BrowserRouter> */}
       
-      <TextArea title="Text-Editor" mode={mode} darkMode={darkMode} btnColor={btnColor}/>
-      <About/>
+      <TextArea heading="Write something" mode={mode} darkMode={darkMode} btnColor={btnColor}/>
     </div>
   
   );
