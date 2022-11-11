@@ -18,6 +18,7 @@ export default function TextArea(props) {
         var text = document.getElementById("textarea1");
         text.select();
         navigator.clipboard.writeText(text.value);
+        alert("Copied to clipboard");
     };
 
     const clearFunc = () => {
